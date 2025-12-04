@@ -8,35 +8,24 @@ on:
     branches:
       - mainFooter
 
-
 jobs:
   sonar:
-    name: SonarQube Scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+  name: SonarQube Scan
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.2"
-          extensions: mbstring, xml, bcmath, curl, gd, mysqli
-          ini-values: post_max_size=256M, upload_max_filesize=256M
-
-      - name: Install Composer dependencies
-        run: composer install --no-progress --no-suggest --prefer-dist
-
-      - name: Run SonarQube scanner
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          composer require --dev sonarsource/sonar-scanner-cli
-          ./vendor/bin/sonar-scanner \
-            -Dsonar.projectKey=laravel-project \
-            -Dsonar.organization=my-org \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=$SONAR_TOKEN
+    - name: Run SonarQube scanner via Docker
+      env:
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        SONAR_LOGIN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        docker run --rm \
+          -e SONAR_HOST_URL="$SONAR_HOST_URL" \
+          -e SONAR_LOGIN="$SONAR_LOGIN" \
+          -v "${{ github.workspace }}:/usr/src" \
+          sonarsource/sonar-scanner-cli
 
   docker:
     name: Build and Push Docker Image
