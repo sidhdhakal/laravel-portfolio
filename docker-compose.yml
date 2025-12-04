@@ -36,6 +36,11 @@ services:
             - "3306:3306"
         networks:
             - laravel
+        volumes:
+            - db_data:/var/lib/mysql # <-- Persist MySQL data here
+
+volumes:
+    db_data: # <-- Named volume declaration
 
 networks:
     laravel:
