@@ -26,7 +26,6 @@ html {
 }
 
 .profile {
-    background-image: url("{{ Storage::disk('s3')->url('profile-back.svg') }}");
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: bottom;
