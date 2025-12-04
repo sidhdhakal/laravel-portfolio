@@ -7,9 +7,9 @@ return [
     | Default Filesystem Disk
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the default filesystem disk that should be used
-    | by the framework. The "local" disk, as well as a variety of cloud
-    | based disks are available to your application. Just store away!
+    | Here you may specify the default filesystem disk that will be used
+    | by the framework. By default, the "local" disk is used. You can
+    | change this to "s3" if you want to use AWS S3 as your default.
     |
     */
 
@@ -39,22 +39,27 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
 
-        's3' => [
-            'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
-            'throw' => false,
-        ],
+     's3' => [
+    'driver' => 's3',
+    'key' => env('AWS_ACCESS_KEY_ID'),
+    'secret' => env('AWS_SECRET_ACCESS_KEY'),
+    'region' => env('AWS_DEFAULT_REGION'),
+    'bucket' => env('AWS_BUCKET'),
+    'url' => env('AWS_URL'),        
+    'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+    'throw' => true,
+
+    // Critical: Tell AWS SDK NOT to send ACL headers
+    'options' => [
+        'ACL' => null,
+    ],
+],
+
 
     ],
 

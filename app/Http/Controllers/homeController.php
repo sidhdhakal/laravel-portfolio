@@ -10,6 +10,21 @@ class homeController extends Controller
     public function getPage(Request $request)
     {
         $seo = DB::table('seo_properties')->where('pageName', '=', 'home')->first();
+
+        // Fallback if no record exists
+        if (!$seo) {
+            $seo = (object)[
+                'title' => 'Default Title',
+                'description' => 'Default description',
+                'keywords' => 'default, laravel',
+                'ogSiteName' => 'MySite',
+                'ogUrl' => url('/'),
+                'ogTitle' => 'Default OG Title',
+                'ogImage' => asset('default.png'),
+                'ogDescription' => 'Default OG description',
+            ];
+        }
+
         return view('pages.home', ['seo' => $seo]);
     }
 
@@ -27,5 +42,4 @@ class homeController extends Controller
     {
         return DB::table('socials')->first();
     }
-
 }

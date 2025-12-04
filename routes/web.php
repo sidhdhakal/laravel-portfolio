@@ -5,6 +5,7 @@ use App\Http\Controllers\homeController;
 use App\Http\Controllers\projectsController;
 use App\Http\Controllers\resumeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,4 @@ Route::controller(resumeController::class)->group(function () {
 
 Route::get('/projectsData', [projectsController::class, 'getProjectsData']);
 Route::post('/contactRequest', [contactController::class, 'contactRequest']);
+Route::post('/upload', [UploadController::class, 'upload']);

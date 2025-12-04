@@ -22,9 +22,12 @@
               </div>
               <div class="col-xxl-7">
                   <div class="d-flex justify-content-center mt-5 mt-xxl-0">
-                      <div class="profile">
-                          <img id="profileImage" class="profile-img" src="" alt="mx-x" />
-                      </div>
+                     <div class="profile">
+    <img id="profileImage" class="profile-img" 
+         src="{{ Storage::disk('s3')->url('assets/profile.png') }}" 
+         alt="mx-x" />
+</div>
+
                   </div>
               </div>
           </div>
