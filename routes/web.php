@@ -25,9 +25,9 @@ Route::get('/projects', [projectsController::class, 'getPage']);
 Route::get('/contact', [contactController::class, 'getPage']);
 
 
-// Ajax Route 
 Route::controller(homeController::class)->group(function () {
     Route::get('/heroData', 'getHeroData');
+
     Route::get('/aboutData', 'getAboutData');
     Route::get('/socialData', 'getSocialData');
 });

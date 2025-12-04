@@ -53,11 +53,8 @@ return [
     'url' => env('AWS_URL'),        
     'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
     'throw' => true,
-
-    // Critical: Tell AWS SDK NOT to send ACL headers
-    'options' => [
-        'ACL' => null,
-    ],
+    'visibility' => 'public',
+   
 ],
 
 

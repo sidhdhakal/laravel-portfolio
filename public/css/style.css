@@ -24,8 +24,9 @@ html {
     width: 3rem;
     font-size: 1.5rem;
 }
+
 .profile {
-    background-image: url("{{ Storage::disk('s3')->url('assets/profile-back.svg') }}");
+    background-image: url("{{ Storage::disk('s3')->url('profile-back.svg') }}");
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: bottom;
