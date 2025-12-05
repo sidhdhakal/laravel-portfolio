@@ -6,6 +6,11 @@ use App\Http\Controllers\projectsController;
 use App\Http\Controllers\resumeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UploadController;
+use Illuminate\Support\Facades\Log;
+
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +45,16 @@ Route::controller(resumeController::class)->group(function () {
     Route::get('/languageData', 'getLanguageData');
 });
 
+
+Route::get('/test-log', function () {
+    Log::channel('custom')->info('This is a test log in project root logs folder!');
+    return 'Log written!';
+});
+
+
 Route::get('/projectsData', [projectsController::class, 'getProjectsData']);
 Route::post('/contactRequest', [contactController::class, 'contactRequest']);
 Route::post('/upload', [UploadController::class, 'upload']);
+
+
+

@@ -8,10 +8,16 @@ services:
         container_name: laravel-app
         volumes:
             - .:/var/www/html
+            - ./logs:/var/www/html/storage/logs # Laravel logs host मा save गर्न
         networks:
             - laravel
         depends_on:
             - mysql
+        environment:
+            - APP_ENV=local
+            - LOG_CHANNEL=stack
+        command: >
+            sh -c "php-fpm -F"   # php-fpm foreground mode
 
     web:
         image: nginx:latest
@@ -37,10 +43,10 @@ services:
         networks:
             - laravel
         volumes:
-            - db_data:/var/lib/mysql # <-- Persist MySQL data here
+            - db_data:/var/lib/mysql # Persist MySQL data
 
 volumes:
-    db_data: # <-- Named volume declaration
+    db_data:
 
 networks:
     laravel:

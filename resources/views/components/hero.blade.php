@@ -1,6 +1,7 @@
 @php
-    $background = 'https://d78worc3m01xi.cloudfront.net/profile-back.svg';
-    $profileImage = 'https://d78worc3m01xi.cloudfront.net/profile.png';
+      $background = env('AWS_URL') . '/profile-back.svg';
+      $profileImage = env('AWS_URL') . '/profile.png';
+
 @endphp
 
 <!-- Header -->
@@ -55,14 +56,9 @@ const getHero = async () => {
         const profileImg = document.getElementById('profileImage');
         if(profileImg) profileImg.src = img || '{{ $profileImage }}';
 
-        const keyLineDiv = document.getElementById('keyLine');
-        if(keyLineDiv) keyLineDiv.innerText = keyLine || '';
-
-        const shortTitleDiv = document.getElementById('shortTitle');
-        if(shortTitleDiv) shortTitleDiv.innerText = shortTitle || '';
-
-        const mainTitleDiv = document.getElementById('mainTitle');
-        if(mainTitleDiv) mainTitleDiv.innerText = title || '';
+        document.getElementById('keyLine').innerText = keyLine || '';
+        document.getElementById('shortTitle').innerText = shortTitle || '';
+        document.getElementById('mainTitle').innerText = title || '';
 
     } catch (error) {
         alert('Something went wrong');
