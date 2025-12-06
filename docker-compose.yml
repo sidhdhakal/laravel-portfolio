@@ -5,7 +5,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        container_name: laravel
+        container_name: laravel-app
         volumes:
             - .:/var/www/html
             # Map host ./logs/laravel to the container's log folder
