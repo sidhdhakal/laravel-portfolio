@@ -17,7 +17,7 @@ services:
         environment:
             - APP_ENV=local
             - LOG_CHANNEL=stack
-        # Use tee to save PHP-FPM system output to a file AND show it in console
+        # Use tee to save PHP-FPM system output to a file AND show it in console ...
         command: >
             sh -c "php-fpm -F 2>&1 | tee /var/www/html/storage/logs/php-fpm.log"
 
