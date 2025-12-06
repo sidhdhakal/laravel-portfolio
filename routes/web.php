@@ -47,7 +47,7 @@ Route::controller(resumeController::class)->group(function () {
 
 
 Route::get('/test-log', function () {
-    Log::channel('custom')->info('This is a test log in project root logs folder!');
+    Log::info('This is a test log from Docker!');
     return 'Log written!';
 });
 

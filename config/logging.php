@@ -31,27 +31,30 @@ return [
     */
     'channels' => [
 
+        // Logs both to file and Docker logs
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single', 'stderr'], // both file and docker logs
+            'channels' => ['single', 'stderr'],
             'ignore_exceptions' => false,
         ],
 
+        // Single file logging to ./logs/laravel.log
         'single' => [
             'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => env('LOG_PATH', base_path('logs/laravel.log')),
             'level' => env('LOG_LEVEL', 'debug'),
-            'replace_placeholders' => true,
         ],
 
+        // Daily rotating logs (optional)
         'daily' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => base_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
             'replace_placeholders' => true,
         ],
 
+        // Slack notifications for critical errors
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
@@ -61,6 +64,7 @@ return [
             'replace_placeholders' => true,
         ],
 
+        // Papertrail logging
         'papertrail' => [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
@@ -73,6 +77,7 @@ return [
             'processors' => [PsrLogMessageProcessor::class],
         ],
 
+        // Docker container logs
         'stderr' => [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
@@ -102,12 +107,12 @@ return [
         ],
 
         'emergency' => [
-            'path' => storage_path('logs/laravel.log'),
+            'path' => base_path('logs/laravel.log'),
         ],
 
         'custom' => [
             'driver' => 'single',
-            'path' => env('LOG_PATH', storage_path('logs/laravel.log')),
+            'path' => env('LOG_PATH', base_path('logs/laravel.log')),
             'level' => 'debug',
         ],
 
