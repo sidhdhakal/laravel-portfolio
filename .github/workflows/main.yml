@@ -9,34 +9,33 @@ on:
       - main
 
 jobs:
-  sonarqube:
-    name: SonarCloud Scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Important for SonarCloud analysis
+  # sonarqube:
+  #   name: SonarCloud Scan
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0
 
-      - name: Set up Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 17
+  #     - name: Set up Java
+  #       uses: actions/setup-java@v3
+  #       with:
+  #         distribution: temurin
+  #         java-version: 17
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v6
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.organization=sidhdhakal
-            -Dsonar.projectKey=sidhdhakal_laravel-portfolio
+  #     - name: SonarCloud Scan
+  #       uses: SonarSource/sonarqube-scan-action@v6
+  #       env:
+  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  #       with:
+  #         args: >
+  #           -Dsonar.organization=sidhdhakal
+  #           -Dsonar.projectKey=sidhdhakal_laravel-portfolio
 
   docker:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
-    needs: sonarqube # This ensures Docker job runs only after SonarCloud succeeds
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

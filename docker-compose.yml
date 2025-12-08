@@ -29,8 +29,6 @@ services:
         volumes:
             - .:/var/www/html
             - ./nginx.conf:/etc/nginx/conf.d/default.conf
-            # Map host ./logs/nginx to container log directory
-            # This breaks the default symlink to stdout and writes to files instead
             - ./logs/nginx:/var/log/nginx
         networks:
             - laravel
